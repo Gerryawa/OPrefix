@@ -17,31 +17,21 @@ public class PrefixManager {
         startUpdateRunnable();
     }
 
-    protected void setPrefix(Player player) {
+    protected void setPrefixAndSuffix(Player player) {
         if (sb.getTeam(player.getName().toLowerCase()) == null) {
             sb.registerNewTeam(player.getName().toLowerCase());
             sb.getTeam(player.getName().toLowerCase()).setPrefix(Utils.parseColor(Utils.parsePAPI("%luckperms_prefix%", player)));
+            sb.getTeam(player.getName().toLowerCase()).setSuffix(Utils.parseColor(Utils.parsePAPI("%luckperms_suffix%", player)));
             sb.getTeam(player.getName().toLowerCase()).addEntry(player.getName());
-            player.setScoreboard(sb);
         } else {
             sb.getTeam(player.getName().toLowerCase()).setPrefix(Utils.parseColor(Utils.parsePAPI("%luckperms_prefix%", player)));
+            sb.getTeam(player.getName().toLowerCase()).setSuffix(Utils.parseColor(Utils.parsePAPI("%luckperms_suffix%", player)));
             if (!sb.getTeam(player.getName().toLowerCase()).getEntries().contains(player.getName())) {
                 sb.getTeam(player.getName().toLowerCase()).addEntry(player.getName());
             }
-            player.setScoreboard(sb);
-        }
-    }
 
-    protected void updatePrefix(Player player) {
-        if (sb.getTeam(player.getName().toLowerCase()) != null) {
-            sb.getTeam(player.getName().toLowerCase()).setPrefix(Utils.parseColor(Utils.parsePAPI("%luckperms_prefix%", player)));
-            player.setScoreboard(sb);
-        }else {
-            sb.registerNewTeam(player.getName().toLowerCase());
-            sb.getTeam(player.getName().toLowerCase()).setPrefix(Utils.parseColor(Utils.parsePAPI("%luckperms_prefix%", player)));
-            sb.getTeam(player.getName().toLowerCase()).addEntry(player.getName());
-            player.setScoreboard(sb);
         }
+        player.setScoreboard(sb);
     }
 
     private void startUpdateRunnable() {
@@ -50,7 +40,7 @@ public class PrefixManager {
             public void run() {
                 ArrayList<Player> list = (ArrayList<Player>) Utils.getOnlinePlayerList();
                 for (Player player : list) {
-                    updatePrefix(player);
+                    setPrefixAndSuffix(player);
                 }
             }
         }.runTaskTimerAsynchronously(OPrefix.p, 0, 5 * 20L);
