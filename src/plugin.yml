@@ -1,0 +1,5 @@
+main: cc.oceanmc.oprefix.OPrefix
+version: 1.0.0
+name: OPrefix
+author: Gerry5126
+depend: [PlaceholderAPI]
