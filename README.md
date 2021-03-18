@@ -1,6 +1,6 @@
 # OPrefix
 
-<a href="https://github.com/Gerryawa/OPrefix/blob/main/README.md">中文版README</a>
+<a href="https://github.com/Gerryawa/OPrefix/blob/main/README_CN.md">中文版README</a>
 
 Prefix plugin for OceanMC server.
 
